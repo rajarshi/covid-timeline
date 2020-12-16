@@ -32,6 +32,7 @@ shinyServer(function(input, output) {
         p %>% 
             add_trace(type = 'bar', x=~Date, y=~dummy,
                       marker = list(color='yellow', width=16),
+                      text = " ", hoverinfo = 'text', 
                       data = tmp %>% mutate(dummy = max(dat$Daily_Deaths)),
                       opacity=0) %>%
             layout(shapes = event_lines, 
@@ -68,7 +69,16 @@ shinyServer(function(input, output) {
                       opacity=0) %>%
             layout(shapes = event_lines, 
                    xaxis = list(title="")) %>% 
-            event_register("plotly_click")
+            event_register("plotly_click") %>% identity()
+#             onRender("
+# function(el, x) {
+# el.on('plotly_hover', function(d) { 
+#     dragLayer = document.getElementsByClassName('nsewdrag')[0];
+#     dragLayer.style.cursor = 'pointer';
+#     console.log('Hover: ', d); 
+#       });
+# }
+# ")
     })
     
     output$click <- renderPrint({
