@@ -16,7 +16,7 @@ shinyServer(function(input, output) {
                       text = paste(dat$Daily_Deaths, "Deaths<br><i>", dat$Daily_Deaths_cum, "cumulative Deaths</i>" ),
                       hoverinfo = "text",
                       marker=list(color='lightgrey')) %>% 
-            add_lines(x=~Date, y=~Daily_Deaths_ma) %>% 
+            add_lines(x=~Date, y=~Daily_Deaths_ma, hoverinfo = "none") %>% 
             layout(showlegend = FALSE)
         
         # make event lines
@@ -47,7 +47,7 @@ shinyServer(function(input, output) {
                       text = paste(dat$Daily_Cases, "cases<br><i>", dat$Daily_Cases_cum, "cumulative cases</i>" ),
                       hoverinfo = "text",
                       marker=list(color='lightgrey')) %>% 
-            add_lines(x=~Date, y=~Daily_Cases_ma) %>% 
+            add_lines(x=~Date, y=~Daily_Cases_ma, hoverinfo = "none") %>% 
             layout(showlegend = FALSE)
         
         # make event lines
