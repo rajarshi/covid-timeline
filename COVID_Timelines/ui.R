@@ -13,13 +13,24 @@ library(htmlwidgets)
 
 
 # Define UI for application that draws a histogram
-shinyUI(fluidPage(theme = "bootstrap.css",
+shinyUI(fluidPage(
+    theme = "bootstrap.css",
     titlePanel("COVID-19 Timeline"),
+    
     fluidRow(
         column(8,
-               fluidRow(plotlyOutput("distPlot")),
+               fluidRow(
+                   tabsetPanel(
+                       type="pills",
+                       tabPanel("Cases", plotlyOutput("casesplot")),
+                       tabPanel("Deaths", plotlyOutput("deathsplot"))
+                   )
+               ),
                fluidRow(verbatimTextOutput("click"))),
         column(4,
                fluidRow(imageOutput("map1")),
                fluidRow(imageOutput("map2")))
-    )))
+    )
+    
+    
+))
