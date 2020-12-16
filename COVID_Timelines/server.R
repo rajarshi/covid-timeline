@@ -62,7 +62,8 @@ shinyServer(function(input, output) {
         
         p %>% 
             add_trace(type = 'bar', x=~Date, y=~dummy,
-                      marker = list(color='yellow', width=16),
+                      marker = list(color='yellow'),
+                      text = " ", hoverinfo = 'text', 
                       data = tmp %>% mutate(dummy = max(dat$Daily_Cases)),
                       opacity=0) %>%
             layout(shapes = event_lines, 
