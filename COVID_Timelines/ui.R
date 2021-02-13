@@ -10,27 +10,39 @@
 library(shiny)
 library(plotly)
 library(htmlwidgets)
-
+library(leaflet)
+library(leaflet.extras)
+library(leaflet.esri)
+library(shinyjs)
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
+    useShinyjs(), 
+    
     theme = "bootstrap.css",
     titlePanel("COVID-19 Timeline"),
     
+    shinyjs::hidden(textInput("hidden", "Will be hidden", "foo")),
+    #textInput("hidden", "Will be hidden", "foo"),
+    
     fluidRow(
-        column(8,
+        column(6,
                fluidRow(
-                   tabsetPanel(
+                   tabsetPanel(id='tabs',
                        type="pills",
-                       tabPanel("Cases", plotlyOutput("casesplot")),
-                       tabPanel("Deaths", plotlyOutput("deathsplot"))
+                       tabPanel("Cases", id='Cases', plotlyOutput("casesplot")),
+                       tabPanel("Deaths", id='Deaths', plotlyOutput("deathsplot"))
+                       
+                       
                    )
                ),
                fluidRow(verbatimTextOutput("click"))),
-        column(4,
-               fluidRow(imageOutput("map1")),
-               fluidRow(imageOutput("map2")))
-    )
+        
+        column(6,
+               fluidRow(leafletOutput("map1"))
+               )
+    ),
+    
     
     
 ))
